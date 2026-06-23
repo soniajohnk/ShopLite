@@ -13,6 +13,8 @@ import {
 import ProductCard from '../components/ProductCard';
 import { getProducts } from '../services/productService';
 import ProductSkeleton from '../components/ProductSkeleton';
+import { COLORS } from '../constants/colors';
+import SearchBar from '../components/SearchBar';
 
 const HomeScreen = ({ navigation }) => {
   const { width } = useWindowDimensions();
@@ -113,12 +115,11 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Product Catalog</Text>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search products..."
+
+      <SearchBar
         value={searchText}
         onChangeText={setSearchText}
+        placeholder="Search products..."
       />
 
       <FlatList
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: COLORS.background,
   },
 
   header: {

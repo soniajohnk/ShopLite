@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { useSelector } from 'react-redux';
-
+import { COLORS } from '../constants/colors';
 import ProductCard from '../components/ProductCard';
 
 const FavoritesScreen = ({ navigation }) => {
@@ -84,7 +84,7 @@ const FavoritesScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: COLORS.background,
   },
 
   emptyContainer: {
