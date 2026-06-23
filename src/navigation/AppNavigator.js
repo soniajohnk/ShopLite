@@ -9,7 +9,11 @@ import { Linking } from 'react-native';
 const Stack = createNativeStackNavigator();
 
 const linking = {
-  prefixes: ['shoplite://app'],
+  prefixes: [
+    'myshoplite://',
+    'shoplite://',
+    'shoplite://app',
+  ],
   config: {
     screens: {
       Main: {
@@ -20,7 +24,12 @@ const linking = {
         },
       },
 
-      ProductDetail: 'product/:id',
+      ProductDetail: {
+        path: 'product/:productId',
+        parse: {
+          productId: Number,
+        },
+      },
     },
   },
 };

@@ -61,7 +61,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>shoplite</string>
+				<string>myshoplite</string>
 			</array>
 		</dict>
 	</array>

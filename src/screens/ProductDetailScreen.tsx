@@ -10,35 +10,46 @@ import {
 
 const ProductDetailScreen = ({ route }) => {
   const [product, setProduct] = useState(null);
-  const { productId } = route.params;
+  const { productId, id } = route.params ?? {};
+  const resolvedProductId = Number(productId ?? id);
 
-useEffect(() => {
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.favorites.items);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProduct = async () => {
+      if (!resolvedProductId) {
+        return;
+      }
+
+      try {
+        const data = await getProductById(resolvedProductId);
+        if (isMounted) {
+          setProduct(data);
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+    };
+
     loadProduct();
-  }, []);
 
-  const loadProduct = async () => {
-    try {
-      const data = await getProductById(productId);
-      setProduct(data);
-    } catch (error) {
-      console.error('Error fetching product:', error);
-    }
-  };
+    return () => {
+      isMounted = false;
+    };
+  }, [resolvedProductId]);
+
+  if (!resolvedProductId) {
+    return <Text>Invalid product link.</Text>;
+  }
 
   if (!product) {
     return <Text>Loading...</Text>;
   }
 
-  //const { product } = route.params;
-  const dispatch = useDispatch();
-
-  const favorites = useSelector(
-    state => state.favorites.items,
-  );
-
-  const isFavorite = favorites.some(
-    item => item.id === product.id,
-  );
+  const isFavorite = favorites.some(item => item.id === product.id);
 
   return (
     <View style={styles.container}>
@@ -50,16 +61,13 @@ useEffect(() => {
       <Text>Category: {product.category}</Text>
       <Text>Rating: ⭐ {product.rating}</Text>
       <Text>Stock: {product.stock}</Text>
+
       <TouchableOpacity
         style={styles.favoriteButton}
-        onPress={() =>
-          dispatch(toggleFavorite(product))
-        }
+        onPress={() => dispatch(toggleFavorite(product))}
       >
         <Text style={styles.favoriteText}>
-          {isFavorite
-            ? '❤️ Remove from Favorites'
-            : '🤍 Add to Favorites'}
+          {isFavorite ? '❤️ Remove from Favorites' : '🤍 Add to Favorites'}
         </Text>
       </TouchableOpacity>
     </View>

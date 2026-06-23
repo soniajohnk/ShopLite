@@ -67,7 +67,6 @@ const HomeScreen = ({ navigation }) => {
         product={item}
         onPress={() =>
           navigation.navigate('ProductDetail', {
-            product: item,
             productId: item.id,
           })
         }
