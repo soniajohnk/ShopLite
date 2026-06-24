@@ -96,3 +96,16 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 # ShopLite
+## Screenshots
+
+| Product List | Product Detail |
+|---|---|
+| ![Product List](./docs/ProductListScreen.png) | ![Product Detail](./docs/ProductDetail.png) |
+
+| Cart | Favorites |
+|---|---|
+| ![Cart](./docs/Cart.png) | ![Favorites](./docs/Favourites.png) |
+
+## Demo
+
+![Demo](./docs/demo/deeplink.gif)

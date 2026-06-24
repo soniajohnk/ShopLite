@@ -11,8 +11,6 @@ const Stack = createNativeStackNavigator();
 const linking = {
   prefixes: [
     'myshoplite://',
-    'shoplite://',
-    'shoplite://app',
   ],
   config: {
     screens: {
@@ -25,9 +23,9 @@ const linking = {
       },
 
       ProductDetail: {
-        path: 'product/:productId',
+        path: 'product',
         parse: {
-          productId: Number,
+          id: Number,
         },
       },
     },

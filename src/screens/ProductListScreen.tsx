@@ -4,9 +4,7 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  Image,
   TouchableOpacity,
-  TextInput,
   useWindowDimensions,
 } from 'react-native';
 

@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import Ionicons from '@react-native-vector-icons/ionicons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { COLORS } from '../constants/colors';
 
 const SearchBar = ({
@@ -28,7 +28,7 @@ const SearchBar = ({
             <TextInput
                 style={styles.input}
                 placeholder={placeholder}
-                placeholderTextColor="#9CA3AF"
+                placeholderTextColor={COLORS.textSecondary}
                 value={value}
                 onChangeText={onChangeText}
                 onFocus={() => setIsFocused(true)}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 8,
         fontSize: 16,
-        color: '#111827',
+        color: COLORS.textPrimary,
     },
 });
 
