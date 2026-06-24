@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { getProductById } from '../services/productService';
 import { useDispatch, useSelector } from 'react-redux';
-
-
-import {
-  toggleFavorite,
-} from '../store/favoritesSlice';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import { toggleFavorite } from '../store/favoritesSlice';
+import { addToCart } from '../store/cartSlice';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import commonStyles from '../styles/commonStyles';
 
 const ProductDetailScreen = ({ route }) => {
   const [product, setProduct] = useState(null);
@@ -54,21 +54,41 @@ const ProductDetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: product.imageUrl }} style={styles.image} />
-
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.desc}>{product.description}</Text>
-      <Text style={styles.price}>${product.price}</Text>
-      <Text>Category: {product.category}</Text>
-      <Text>Rating: ⭐ {product.rating}</Text>
-      <Text>Stock: {product.stock}</Text>
-
+      <View style={styles.detailsContainer}>
+        <View style={styles.deatilsBlock}>
+          <Text style={styles.name}>{product.name}</Text>
+          <Text style={styles.desc}>{product.description}</Text>
+          <Text style={styles.price}>${product.price}</Text>
+          <Text>Category: {product.category}</Text>
+          <Text>Rating: ⭐ {product.rating}</Text>
+          <Text>Stock: {product.stock}</Text>
+        </View>
+        <View style={styles.favouriteBlock}>
+          <TouchableOpacity
+            onPress={() => dispatch(toggleFavorite(product))}
+          >
+            <Ionicons
+              name={isFavorite ? 'heart' : 'heart-outline'}
+              size={28}
+              color="red"
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
       <TouchableOpacity
-        style={styles.favoriteButton}
-        onPress={() => dispatch(toggleFavorite(product))}
+        style={commonStyles.addButton}
+        onPress={() => {
+          dispatch(addToCart(product))
+          Toast.show({
+            type: 'success',
+            text1: 'Added to Cart',
+            text2: `${product.name} added successfully`,
+            position: 'bottom',
+          });
+        }
+        }
       >
-        <Text style={styles.favoriteText}>
-          {isFavorite ? '❤️ Remove from Favorites' : '🤍 Add to Favorites'}
-        </Text>
+        <Text style={commonStyles.addButtonText}> Add to Cart</Text>
       </TouchableOpacity>
     </View>
   );
@@ -82,17 +102,16 @@ const styles = StyleSheet.create({
   name: { fontSize: 22, fontWeight: 'bold', marginTop: 10 },
   desc: { marginTop: 8, color: '#555' },
   price: { fontSize: 18, color: 'green', marginTop: 10 },
-  favoriteButton: {
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#DDD',
-    padding: 12,
-    borderRadius: 8,
-    marginTop: 20,
+  deatilsBlock: {
+    flex: 1,
   },
-
-  favoriteText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+  favouriteBlock: {
+    padding: 8,
+  },
+  detailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    padding: 16,
   },
 });
