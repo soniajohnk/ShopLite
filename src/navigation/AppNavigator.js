@@ -24,9 +24,6 @@ const linking = {
 
       ProductDetail: {
         path: 'product/:productId',
-        parse: {
-          id: Number,
-        },
       },
     },
   },
