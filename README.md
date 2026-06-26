@@ -103,5 +103,8 @@ Demonstrates:
 
 GIF/Screenshot:
 
-<img src="./docs/demo/Deeplink_Demo.gif" alt="App Demo" width="300">
+| Android | iOS  |
+|--------------|----------------|
+| <img src="./docs/demo/Deeplink_Demo_Android.gif" alt="App Demo" width="300"> | <img src="./docs/demo/Deeplink_Demo_iOS.gif" alt="App Demo" width="300"> | 
+
 
